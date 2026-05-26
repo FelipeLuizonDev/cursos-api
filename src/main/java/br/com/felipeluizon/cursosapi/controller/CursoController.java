@@ -1,7 +1,7 @@
 package br.com.felipeluizon.cursosapi.controller;
 
-import br.com.felipeluizon.cursosapi.CursosApiApplication;
 import br.com.felipeluizon.cursosapi.dto.CursoRequestDTO;
+import br.com.felipeluizon.cursosapi.dto.CursoUpdateDTO;
 import br.com.felipeluizon.cursosapi.entity.Curso;
 import br.com.felipeluizon.cursosapi.service.CursoService;
 import jakarta.validation.Valid;
@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/cursos")
@@ -29,5 +30,13 @@ public class CursoController {
             @RequestParam(required = false) String category
     ) {
         return cursoService.findAll(name, category);
+    }
+
+    @PutMapping("/{id}")
+    public Curso update(
+            @PathVariable UUID id,
+            @RequestBody CursoUpdateDTO cursoUpdateDTO
+    ) {
+        return cursoService.update(id, cursoUpdateDTO);
     }
 }

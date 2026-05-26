@@ -3,11 +3,13 @@ package br.com.felipeluizon.cursosapi.service;
 import br.com.felipeluizon.cursosapi.dto.CursoRequestDTO;
 import br.com.felipeluizon.cursosapi.dto.CursoUpdateDTO;
 import br.com.felipeluizon.cursosapi.entity.Curso;
+import br.com.felipeluizon.cursosapi.exception.ResourceNotFoundException;
 import br.com.felipeluizon.cursosapi.repository.CursoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -46,7 +48,15 @@ public class CursoService {
         return cursoRepository.findAll();
     }
 
-    public Curso update(Curso curso, CursoUpdateDTO cursoUpdateDTO) {
+    public Curso findById(UUID id) {
+        return cursoRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Curso não encontrado"));
+    }
+
+    public Curso update(UUID id, CursoUpdateDTO cursoUpdateDTO) {
+        Curso curso = findById(id);
+
         if (cursoUpdateDTO.name() != null) {
             curso.setName(cursoUpdateDTO.name());
         }
