@@ -1,13 +1,9 @@
 package br.com.felipeluizon.cursosapi.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -15,7 +11,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "cursos")
 @Getter
-@Service
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

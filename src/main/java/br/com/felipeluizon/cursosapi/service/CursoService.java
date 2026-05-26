@@ -1,0 +1,60 @@
+package br.com.felipeluizon.cursosapi.service;
+
+import br.com.felipeluizon.cursosapi.dto.CursoRequestDTO;
+import br.com.felipeluizon.cursosapi.dto.CursoUpdateDTO;
+import br.com.felipeluizon.cursosapi.entity.Curso;
+import br.com.felipeluizon.cursosapi.repository.CursoRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class CursoService {
+    private final CursoRepository cursoRepository;
+
+    public Curso create(CursoRequestDTO cursoRequestDTO) {
+        Curso curso = Curso.builder()
+                .name(cursoRequestDTO.name())
+                .category(cursoRequestDTO.category())
+                .active(true)
+                .build();
+
+        return cursoRepository.save(curso);
+    }
+
+    public List<Curso> findAll(String name, String category) {
+        if (name != null && category != null) {
+            return cursoRepository
+                    .findByNameContainingIgnoreCaseAndCategoryContainingIgnoreCase(
+                            name,
+                            category
+                    );
+        }
+
+        if (name != null) {
+            return cursoRepository
+                    .findByNameContainingIgnoreCase(name);
+        }
+
+        if (category != null) {
+            return cursoRepository
+                    .findByCategoryContainingIgnoreCase(category);
+        }
+
+        return cursoRepository.findAll();
+    }
+
+    public Curso update(Curso curso, CursoUpdateDTO cursoUpdateDTO) {
+        if (cursoUpdateDTO.name() != null) {
+            curso.setName(cursoUpdateDTO.name());
+        }
+
+        if (cursoUpdateDTO.category() != null) {
+            curso.setCategory(cursoUpdateDTO.category());
+        }
+
+        return cursoRepository.save(curso);
+    }
+}
