@@ -39,4 +39,10 @@ public class CursoController {
     ) {
         return cursoService.update(id, cursoUpdateDTO);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable UUID id) {
+        cursoService.delete(id);
+    }
 }

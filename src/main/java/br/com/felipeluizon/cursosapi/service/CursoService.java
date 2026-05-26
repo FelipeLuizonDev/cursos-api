@@ -67,4 +67,10 @@ public class CursoService {
 
         return cursoRepository.save(curso);
     }
+
+    public void delete(UUID id) {
+        Curso curso = findById(id);
+
+        cursoRepository.delete(curso);
+    }
 }
