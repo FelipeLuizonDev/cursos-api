@@ -73,4 +73,12 @@ public class CursoService {
 
         cursoRepository.delete(curso);
     }
+
+    public Curso toggleActive(UUID id) {
+        Curso curso = findById(id);
+
+        curso.setActive(!curso.getActive());
+
+        return cursoRepository.save(curso);
+    }
 }

@@ -45,4 +45,9 @@ public class CursoController {
     public void delete(@PathVariable UUID id) {
         cursoService.delete(id);
     }
+
+    @PatchMapping("/{id}/active")
+    public Curso toggleActive(@PathVariable UUID id) {
+        return cursoService.toggleActive(id);
+    }
 }
