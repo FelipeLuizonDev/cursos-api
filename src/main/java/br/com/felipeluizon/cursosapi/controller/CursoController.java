@@ -32,6 +32,11 @@ public class CursoController {
         return cursoService.findAll(name, category);
     }
 
+    @GetMapping("/{id}")
+    public Curso findById(@PathVariable UUID id) {
+        return cursoService.findById(id);
+    }
+
     @PutMapping("/{id}")
     public Curso update(
             @PathVariable UUID id,
