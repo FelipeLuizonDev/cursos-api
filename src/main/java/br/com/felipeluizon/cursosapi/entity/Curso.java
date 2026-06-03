@@ -27,6 +27,9 @@ public class Curso {
     private String category;
 
     @Column(nullable = false)
+    private String professor;
+
+    @Column(nullable = false)
     private Boolean active = true;
 
     @CreationTimestamp

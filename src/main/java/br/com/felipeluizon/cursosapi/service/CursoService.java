@@ -20,6 +20,7 @@ public class CursoService {
         Curso curso = Curso.builder()
                 .name(cursoRequestDTO.name())
                 .category(cursoRequestDTO.category())
+                .professor(cursoRequestDTO.professor())
                 .active(true)
                 .build();
 
@@ -63,6 +64,10 @@ public class CursoService {
 
         if (cursoUpdateDTO.category() != null) {
             curso.setCategory(cursoUpdateDTO.category());
+        }
+
+        if (cursoUpdateDTO.professor() != null) {
+            curso.setProfessor(cursoUpdateDTO.professor());
         }
 
         return cursoRepository.save(curso);

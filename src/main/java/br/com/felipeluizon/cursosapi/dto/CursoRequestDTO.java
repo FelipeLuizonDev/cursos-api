@@ -3,10 +3,13 @@ package br.com.felipeluizon.cursosapi.dto;
 import jakarta.validation.constraints.NotBlank;
 
 public record CursoRequestDTO(
-   @NotBlank(message = "O nome do curso é obrigatório")
+   @NotBlank(message = "Nome é obrigatório")
    String name,
 
-   @NotBlank(message = "A categoria do curso é obrigatória")
-   String category
+   @NotBlank(message = "Categoria é obrigatória")
+   String category,
+
+   @NotBlank(message = "Professor é obrigatório")
+   String professor
 ) {
 }
